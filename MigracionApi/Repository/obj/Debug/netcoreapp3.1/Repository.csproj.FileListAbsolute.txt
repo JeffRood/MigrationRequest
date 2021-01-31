@@ -1,0 +1,8 @@
+C:\Disco\DGM\MigracionApi\Repository\bin\Debug\netcoreapp3.1\Repository.deps.json
+C:\Disco\DGM\MigracionApi\Repository\bin\Debug\netcoreapp3.1\Repository.dll
+C:\Disco\DGM\MigracionApi\Repository\obj\Debug\netcoreapp3.1\Repository.csprojAssemblyReference.cache
+C:\Disco\DGM\MigracionApi\Repository\obj\Debug\netcoreapp3.1\Repository.AssemblyInfoInputs.cache
+C:\Disco\DGM\MigracionApi\Repository\obj\Debug\netcoreapp3.1\Repository.AssemblyInfo.cs
+C:\Disco\DGM\MigracionApi\Repository\bin\Debug\netcoreapp3.1\Repository.runtimeconfig.json
+C:\Disco\DGM\MigracionApi\Repository\bin\Debug\netcoreapp3.1\Repository.runtimeconfig.dev.json
+C:\Disco\DGM\MigracionApi\Repository\obj\Debug\netcoreapp3.1\Repository.genruntimeconfig.cache
