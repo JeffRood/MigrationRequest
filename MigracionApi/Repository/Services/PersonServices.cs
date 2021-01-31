@@ -10,10 +10,10 @@ namespace Repository.Services
     {
         private readonly IPersonRepository _PersonDB;
 
-        public PersonServices(IPersonRepository Person)
-        {
-            _PersonDB = Person;
-        }
+            public PersonServices(IPersonRepository Person)
+            {
+                _PersonDB = Person;
+            }
         public IResultadoOperaciones<Person> Create(Person entity)
         {            
             IResultadoOperaciones<Person> result = _PersonDB.Create(entity);
@@ -37,11 +37,18 @@ namespace Repository.Services
 
             if (PersonDeleted != null)
             {
-            IResultadoOperaciones<Person> deleted = _PersonDB.Delete(PersonDeleted, "Persona  eliminado Correctamente");
+            IResultadoOperaciones<Person> deleted = _PersonDB.Delete(PersonDeleted, "Persona eliminado Correctamente");
             return deleted;
 
             }
             return null;
+
+        }
+
+        public IResultadoOperaciones<Person> Update(Person entity)
+        {
+            IResultadoOperaciones<Person> Updated = _PersonDB.Update(entity, "Persona Actualizado Correctamente");
+            return Updated;
 
         }
     }

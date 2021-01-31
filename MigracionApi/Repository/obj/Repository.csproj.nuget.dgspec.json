@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Disco\\DGM\\MigracionApi\\Repository\\Repository.csproj": {}
+    "C:\\Disco\\Migration\\MigracionApi\\Repository\\Repository.csproj": {}
   },
   "projects": {
-    "C:\\Disco\\DGM\\MigracionApi\\Repository\\Repository.csproj": {
+    "C:\\Disco\\Migration\\MigracionApi\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Disco\\DGM\\MigracionApi\\Repository\\Repository.csproj",
+        "projectUniqueName": "C:\\Disco\\Migration\\MigracionApi\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Disco\\DGM\\MigracionApi\\Repository\\Repository.csproj",
+        "projectPath": "C:\\Disco\\Migration\\MigracionApi\\Repository\\Repository.csproj",
         "packagesPath": "C:\\Users\\j.martinez\\.nuget\\packages\\",
-        "outputPath": "C:\\Disco\\DGM\\MigracionApi\\Repository\\obj\\",
+        "outputPath": "C:\\Disco\\Migration\\MigracionApi\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -41,14 +41,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "EntityFramework": {
-              "target": "Package",
-              "version": "[6.4.4, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[5.0.2, )"
-            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",

@@ -12,10 +12,10 @@ namespace Repository.Repo
 {
     public class GenericRepository<T> : IGeneric<T> where T : class
     {
-        private MigrationDbContext _context;
+        private TestDbContext _context;
         private readonly DbSet<T> _set;
 
-        public GenericRepository(MigrationDbContext DbContext)
+        public GenericRepository(TestDbContext DbContext)
         {
             _context = DbContext;
             _set = DbContext.Set<T>();

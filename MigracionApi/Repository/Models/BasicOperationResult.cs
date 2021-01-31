@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Repository.Models
 {
-    class BasicOperationResult<T> : IResultadoOperaciones<T>
+    public class BasicOperationResult<T> : IResultadoOperaciones<T>
     {
         BasicOperationResult(string message, bool success, T entity)
         {
