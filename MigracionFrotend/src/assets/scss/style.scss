@@ -1,0 +1,65 @@
+/*
+Template Name: Admin Pro Admin
+Author: Wrappixel
+Email: niravjoshi87@gmail.com
+File: scss
+*/
+/**
+ * Table Of Content
+ *
+ * 	1. Globals
+ *	2. Headers
+ *	3. Navigations
+ *	4. Banners
+ *	5. Footers
+ *	6. app
+ *	7. Widgets
+ *	8. Custom Templates
+ */
+ 
+@import 'variable'; 
+@import 'app';
+@import 'sidebar';
+@import 'pages/pages'; 
+@import '../scss/icons/font-awesome/css/font-awesome.min.css';
+@import '../scss/icons/simple-line-icons/css/simple-line-icons.css';
+@import '../scss/icons/weather-icons/css/weather-icons.min.css';
+@import '../scss/icons/linea-icons/linea.css';
+@import '../scss/icons/themify-icons/themify-icons.css'; 
+@import '../scss/icons/flag-icon-css/flag-icon.min.css';
+@import "../scss/icons/material-design-iconic-font/css/materialdesignicons.min.css";
+@import 'widgets/widgets';
+@import 'grid';
+@import 'responsive'; 
+@import '../css/spinners.css';
+@import '../css/animate.css';   
+   
+.tooltip {
+	position: relative;
+
+	&:hover::after,&:hover::before { opacity:1; transition-delay: .2s; }
+
+	&::after {
+		content: attr(data-tooltip);
+		background-color: $black;
+		border-radius: 4px;
+		color: $white;
+		font-size: 13px;
+		left: 50%;
+		line-height: normal;
+		min-width: 80px;
+		opacity: 0;
+		padding: 5px;
+		position: absolute;
+		text-align: center;
+		top: 100%; 
+		z-index: 999;
+		transform: translate(-50%, 0);
+		pointer-events: none;
+	}
+
+	/*positions*/
+	&.left::after { left: 0%; margin-left: -8px; top: 50%; transform: translate(-100%, -50%); }
+	&.top::after { top: -8px; transform: translate(-50%, -100%); }	 
+	&.right::after { left: 100%; top: 50%; margin-left: 8px; transform: translate(0, -50%) }	
+}

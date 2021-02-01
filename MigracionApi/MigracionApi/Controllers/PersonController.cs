@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -32,15 +33,32 @@ namespace MigracionApi.Controllers
 
 
         [HttpPost("Create")]
-        public IResultadoOperaciones<Person> Create([FromBody] Person Person)
-        {
-            IResultadoOperaciones<Person> result = _PersonServices.Create(Person);
-
-            if (result == null)
+        public IResultadoOperaciones<Person> Create([FromForm] Person Person)
+        {            
+            foreach (var item in HttpContext.Request.Form.Files)
             {
-                return BasicOperationResult<Person>.Fail(result.Message);
+                var PathPhoto = Person.passport + Path.GetExtension(item.FileName);
+                Person.photo = PathPhoto;
+                IResultadoOperaciones<Person> result = _PersonServices.Create(Person);
+
+                if (result == null)
+                {
+                    return BasicOperationResult<Person>.Fail(result.Message);
+                }
+                var filePath = "Documentos";
+
+                if (item.Length > 0)
+                {
+
+                    using (var stream = new FileStream(Path.Combine(Environment.CurrentDirectory, filePath, PathPhoto), FileMode.Create))
+                    {
+                        item.CopyToAsync(stream);
+                        stream.Close();
+                    }
+                }
+                return result;
             }
-            return result;
+            return BasicOperationResult<Person>.Fail("No estan todos los datos disponibles");
         }
 
 
@@ -57,10 +75,11 @@ namespace MigracionApi.Controllers
         }
 
         [HttpPost("Update")]
-        public IResultadoOperaciones<Person> Update(int PersonId)
+        public IResultadoOperaciones<Person> Update(Person Persons)
         {
-            Person PersonUpdate = _PersonServices.GetAll().ToList().Find(x => x.Id == PersonId);
-            IResultadoOperaciones<Person> result = _PersonServices.Update(PersonUpdate);
+           
+           
+            IResultadoOperaciones<Person> result = _PersonServices.Update(Persons);
 
             if (result == null)
             {

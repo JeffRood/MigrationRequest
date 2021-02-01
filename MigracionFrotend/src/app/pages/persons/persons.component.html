@@ -1,0 +1,123 @@
+
+<div *ngIf="PersonList?.length === 0">
+
+<app-loading></app-loading>
+    
+</div>
+<section class="animated fadeIn " *ngIf="PersonList?.length > 0">
+        <div class="derecha">
+       
+
+            <button type="button" data-toggle="modal" data-target="#PersonModal" id="btnPersona" class="btn btn-info open-modal">
+                + Agregar Persona
+            </button>
+            
+        </div>	
+        <h2>Personas</h2>
+     
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                  <th scope="col">Nombre Completo</th>
+                  <th scope="col">Pasaporte</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Opcion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let persona of PersonList">
+                  <td>{{persona.name }} {{persona.lastName}}</td>
+                  <td>{{persona.passport}}</td>
+                <th scope="row">{{persona.address}}</th>
+               <td> 
+                   <button type="button"  data-toggle="modal" data-target="#MenuModal" class="btn btn-primary">Editar</button>   
+                <button style="margin-left: 5px;" type="button" class="btn btn-danger"> Inactivar</button></td>
+              </tr>
+             
+            </tbody>
+          </table>
+
+</section>
+
+<form [formGroup]="PersonForm">
+    <div class="modal fade" id="PersonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{PersonForm?.controls?.TituloFormulario?.value}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="inputEmail4">Nombre</label>
+                  <input type="text" formControlName="name" class="form-control"  >
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="inputPassword4">Apellido</label>
+                  <input type="text" formControlName="lastName" class="form-control" >
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="formGroupExampleInput">Pasaporte</label>
+                    <input type="text" formControlName="passport"  class="form-control" >
+                  </div>
+<div class="col-md-6">
+
+    <label for="formGroupExampleInput">Sexo</label>
+    <select class="form-control " formControlName="sex">
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+      </select>
+
+</div>
+                
+              </div>
+
+
+
+                <div class="form-group">
+                  <label for="inputEmail4">Direccion </label>
+                  <input type="text" formControlName="address" class="form-control"  >
+                </div>
+                <div class="form-group ">
+                  <label for="inputPassword4">Fecha de Nacimiento</label>
+                  <input type="date" formControlName="birthday" class="form-control" >
+                </div>
+             
+                   
+                <div class="form-group col-md-7 ">
+                    <label for="inputPassword4">Foto</label>
+                    <input type="file" 
+                    formControlName="photo"
+                    (change)="getArchivo($event)"
+                     class="form-control" >
+                  </div>
+    
+                    <!-- <div class="form-group">
+                      <label for="formGroupExampleInput">Ruta que desea como padre</label>
+                      <ng-select
+                          [items]="ListadoMenus" 
+                          bindLabel="nombre" 
+                          bindValue="menuId" 
+                          [clearable]="false"  
+                          formControlName="PadreID">
+                      </ng-select>
+                  </div> -->
+
+            
+                      
+          </div>
+          <div class="modal-footer">
+            <button id="cancelarMenuModal"type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="CreatePerson()"  class="btn btn-info">Agregar Persona</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
