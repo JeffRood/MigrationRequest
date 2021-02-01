@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IPerson } from 'src/app/Models/Person';
 import { PagesService } from '../pages.service';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-persons',
@@ -11,19 +12,45 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PersonsComponent implements OnInit {
   PersonForm: FormGroup;
-  PersonList: IPerson[] = [];
+  isLoading: boolean = false;
   public file: File;
   constructor(public pagesServices: PagesService,  public fb: FormBuilder,  public toast: ToastrService) { }
 
   ngOnInit(): void {
-    this.ListPerson();
-    this.BuildPersonForm();
+    this.isLoading = true;
+    this.BuildPersonForm();   
+      this.pagesServices.GetPersonsList();
+    this.isLoading = false;
+
+  }
+  simpleAlert(PersonId){
+    Swal.fire({
+      title: 'Seguro desea eliminar esta persona?',
+      text: 'Se eliminaran los datos de esta persona!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, Eliminar',
+      cancelButtonText: 'No, eliminar'
+    }).then((result) => {
+      if (result.value) {
+        this.RemovePerson(PersonId)
+        Swal.fire(
+          'Eliminado!',
+          'Persona Eliminada correctamente.',
+          'success'
+        )
+      // For more information about handling dismissals please visit
+      // https://sweetalert2.github.io/#handling-dismissals
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelado',
+          'No se ha eliminado la persona :)',
+          'error'
+        )
+      }
+    })
   }
 
-  ListPerson() {
-    this.toast.success("Hola")
-    this.pagesServices.GetPersonsList().then(x => this.PersonList = x);
-  }
 
   BuildPersonForm() {
     this.PersonForm = this.fb.group({
@@ -60,8 +87,7 @@ CreatePerson() {
     if (x.success) {
       this.toast.success(x.message);
       this.clearModal();
-      this.ListPerson();
-
+      this.pagesServices.GetPersonsList();
     } else this.toast.error('No se ha podido Actualizar la persona intente mas tarde')  
      });
 }
@@ -74,10 +100,11 @@ CreatePerson() {
 
   }
 
-  RemovePerson() {
-    this.pagesServices.PostPersonRemove(this.ReturnPerson().Id).then( x => {
+  RemovePerson(PersonId) {
+    this.pagesServices.PostPersonRemove(PersonId).then( x => {
    if (x.success) {
-     this.toast.success(x.message)
+     this.clearModal();
+     this.pagesServices.GetPersonsList();
    } else this.toast.error('No se ha podido Eliminar la persona intente mas tarde')  
     });
 
@@ -94,6 +121,5 @@ CreatePerson() {
     document.getElementById("cancelarMenuModal").click();
     this.PersonForm.reset();
     this.BuildPersonForm();
-
   }
 }

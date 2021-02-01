@@ -26,6 +26,7 @@ namespace MigracionApi.Controllers
         public IEnumerable<Request> GetAll()
         {
             IEnumerable<Request> operationResult = _RequestServices.GetAll();
+            
             return operationResult;
         }
 
@@ -33,20 +34,24 @@ namespace MigracionApi.Controllers
         [HttpPost("Create")]
         public IResultadoOperaciones<Request> Create([FromBody] Request Request)
         {
+            Request.statusId = 1;
+            Request.creationDate = DateTime.Now;
             IResultadoOperaciones<Request> result = _RequestServices.Create(Request);
 
             if (result == null)
             {
                 return BasicOperationResult<Request>.Fail(result.Message);
             }
+            
             return result;
         }
 
 
 
         [HttpPost("Remove")]
-        public IResultadoOperaciones<Request> Remove(int RequestId)
+        public IResultadoOperaciones<Request> Remove([FromQuery]int RequestId)
         {
+
             IResultadoOperaciones<Request> result = _RequestServices.Remove(RequestId);
 
             if (result == null)

@@ -9,7 +9,7 @@ import { APIURL } from '../Shared/urls';
 })
 export class PagesService {
   Usuario;
-  
+  PersonList: IPerson[] = [];
   constructor(private http: HttpClient) { }
 
 
@@ -18,7 +18,7 @@ export class PagesService {
       this.http.get(APIURL.Person.List).subscribe(success => {
         resolve(success as IPerson[]);
       }, () => {false} );
-    });
+    }).then(x => this.PersonList = x as IPerson[]);
   }
 
 
@@ -46,7 +46,7 @@ export class PagesService {
 
   PostPersonRemove(PerdonId: Number): Promise<BasicResult<IPerson>> {
     return new Promise((resolve, reject) => {      
-      this.http.post(APIURL.Person.Remove, PerdonId).subscribe(success => {
+      this.http.post(APIURL.Person.Remove + '?PersonId=' +PerdonId , PerdonId).subscribe(success => {
         resolve(success as BasicResult<IPerson>);
       }, () => {reject(null)} );
     });
@@ -56,7 +56,7 @@ export class PagesService {
   
   PostPersonUpdate(Persons: IPerson): Promise<BasicResult<IPerson>> {
     return new Promise((resolve, reject) => {      
-      this.http.post(APIURL.Person.Remove, Persons).subscribe(success => {
+      this.http.post(APIURL.Person.Update , Persons).subscribe(success => {
         resolve(success as BasicResult<IPerson>);
       }, () => {reject(null)} );
     });
@@ -74,17 +74,21 @@ export class PagesService {
 
 
 
-  PostRequestCreate(Person :IRequest): Promise<BasicResult<IRequest>>  {
+  PostRequestCreate(Request :IRequest): Promise<BasicResult<IRequest>>  {
     return new Promise((resolve, reject) => {      
-      this.http.post(APIURL.Request.Create, Person).subscribe(success => {
+      this.http.post(APIURL.Request.Create, Request).subscribe(success => {
         resolve(success as BasicResult<IRequest>);
       }, () => {reject(null)} );
     });
   }
 
   PostRequestRemove(RequestId: number): Promise<BasicResult<IRequest>> {
+    debugger;
+    let object = {
+      RequestId: RequestId
+    }
     return new Promise((resolve, reject) => {      
-      this.http.post(APIURL.Request.Remove, RequestId).subscribe(success => {
+      this.http.post(APIURL.Request.Remove + '?RequestId=' + RequestId, object).subscribe(success => {
         resolve(success as BasicResult<IRequest>);
       }, () => {reject(null)} );
     });

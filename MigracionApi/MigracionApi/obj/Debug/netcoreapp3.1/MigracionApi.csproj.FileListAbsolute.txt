@@ -85,6 +85,11 @@ C:\Disco\Migration\MigracionApi\MigracionApi\obj\Debug\netcoreapp3.1\staticwebas
 C:\Disco\Migration\MigracionApi\MigracionApi\obj\Debug\netcoreapp3.1\MigracionApi.genruntimeconfig.cache
 C:\Disco\Migration\MigracionApi\MigracionApi\bin\Debug\netcoreapp3.1\Humanizer.dll
 C:\Disco\Migration\MigracionApi\MigracionApi\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Disco\Migration\MigracionApi\MigracionApi\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Disco\Migration\MigracionApi\MigracionApi\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Proxies.dll
+C:\Disco\Migration\MigracionApi\MigracionApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Disco\Migration\MigracionApi\MigracionApi\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Disco\Migration\MigracionApi\MigracionApi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Disco\Migration\MigracionApi\MigracionApi\obj\Debug\netcoreapp3.1\MigracionApi.csproj.CoreCompileInputs.cache
 C:\Disco\Migration\MigracionApi\MigracionApi\obj\Debug\netcoreapp3.1\MigracionApi.MvcApplicationPartsAssemblyInfo.cs
 C:\Disco\Migration\MigracionApi\MigracionApi\obj\Debug\netcoreapp3.1\MigracionApi.MvcApplicationPartsAssemblyInfo.cache

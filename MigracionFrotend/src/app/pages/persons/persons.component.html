@@ -1,10 +1,10 @@
 
-<div *ngIf="PersonList?.length === 0">
+<div *ngIf="isLoading">
 
 <app-loading></app-loading>
     
 </div>
-<section class="animated fadeIn " *ngIf="PersonList?.length > 0">
+<section class="animated fadeIn " >
         <div class="derecha">
        
 
@@ -15,8 +15,12 @@
         </div>	
         <h2>Personas</h2>
      
-
-        <table class="table table-striped">
+        <div class="card" *ngIf="pagesServices.PersonList?.length == 0 && !isLoading">
+          <div class="card-body">
+            Aun no tienes Personas registrada
+          </div>
+        </div>
+        <table class="table table-striped" *ngIf="pagesServices.PersonList?.length > 0 && !isLoading">
             <thead>
               <tr>
                   <th scope="col">Nombre Completo</th>
@@ -26,13 +30,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let persona of PersonList">
+              <tr *ngFor="let persona of pagesServices?.PersonList">
                   <td>{{persona.name }} {{persona.lastName}}</td>
                   <td>{{persona.passport}}</td>
                 <th scope="row">{{persona.address}}</th>
                <td> 
-                   <button type="button"  data-toggle="modal" data-target="#MenuModal" class="btn btn-primary">Editar</button>   
-                <button style="margin-left: 5px;" type="button" class="btn btn-danger"> Inactivar</button></td>
+                   <button type="button"  data-toggle="modal" data-target="#PersonModal" class="btn btn-primary">Editar</button>   
+                <button style="margin-left: 5px;" (click)="simpleAlert(persona.id)"  type="button" class="btn btn-danger"> Inactivar</button></td>
               </tr>
              
             </tbody>

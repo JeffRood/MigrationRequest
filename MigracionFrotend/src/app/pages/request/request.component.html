@@ -1,1 +1,89 @@
-<p>request works!</p>
+
+<div *ngIf="isLoading">
+
+  <app-loading></app-loading>
+      
+  </div>
+
+
+<section class="animated fadeIn " >
+
+    <div class="derecha">
+       
+
+        <button type="button" data-toggle="modal" data-target="#PersonModal" id="btnPersona" class="btn btn-info open-modal">
+            + Agregar  Solicitud
+        </button>
+        
+    </div>	
+    <h2>Solicitudes</h2>
+ 
+   
+    <div class="card" *ngIf="RequestList?.length == 0 && !isLoading">
+      <div class="card-body">
+        Aun no tienes Solicitudes registradas
+      </div>
+    </div>
+
+    <table class="table table-striped" *ngIf="RequestList?.length > 0 && !isLoading">
+        <thead>
+          <tr>
+              <th scope="col">Numero de Solicitud</th>
+              <th scope="col">Solicitante </th>
+            <th scope="col">Estado de Solicitud</th>
+            <th scope="col">Opcion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let Request of RequestList">
+              <td>{{Request.id }}</td>
+              <td>{{Request?.person?.name}} {{Request?.person?.lastName}} </td>
+            <th scope="row">{{Request?.status?.statusDescription}}</th>
+           <td> 
+               <button type="button"  data-toggle="modal" data-target="#MenuModal" class="btn btn-info">Editar</button>   
+            <button style="margin-left: 5px;" (click)="simpleAlert(Request.id)" type="button" class="btn btn-danger"> Inactivar</button></td>
+          </tr>
+         
+        </tbody>
+      </table>
+
+
+</section>
+
+
+
+<form [formGroup]="RequestForm">
+    <div class="modal fade" id="PersonModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel"> Formulario de solicitud </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span> 
+            </button>
+          </div>
+          <div class="modal-body">
+
+
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Nombre del solicitante</label>
+                      <ng-select
+                          [items]="pagesServices.PersonList" 
+                          bindLabel= "name" 
+                          bindValue="id" 
+                          [clearable]="false"  
+                          formControlName="PersonId">
+                      </ng-select>
+                  </div>
+
+            
+                      
+          </div>
+          <div class="modal-footer">
+            <button id="cancelarRequestModal"type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button type="button" (click)="CreateRequest()"  class="btn btn-info">Solicitar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>

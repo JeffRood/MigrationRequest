@@ -1,6 +1,6 @@
 
 export interface IPerson {
-    Id ?: Number; 
+    id ?: Number; 
     name ?: Number; 
     lastName ?: string; 
     passport ?: string; 

@@ -63,7 +63,7 @@ namespace MigracionApi.Controllers
 
 
         [HttpPost("Remove")]
-        public IResultadoOperaciones<Person> Remove(int PersonId)
+        public IResultadoOperaciones<Person> Remove([FromQuery]int PersonId)
         {
             IResultadoOperaciones<Person> result = _PersonServices.Remove(PersonId);
 

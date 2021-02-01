@@ -31,10 +31,15 @@ namespace MigracionApi
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddDbContext<TestDbContext>
-                (options => options.UseSqlServer(Configuration.GetConnectionString("MigrationDB"), b => b.MigrationsAssembly("Repository")));
+                (
+                
+                options => {
+                    options.UseLazyLoadingProxies();
+                    options.UseSqlServer(Configuration.GetConnectionString("MigrationDB"), b => b.MigrationsAssembly("Repository"));
+                });
             //services.AddDbContext<TestDbContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("MigrationDB")));
 
@@ -101,6 +106,7 @@ namespace MigracionApi
             //services.AddTransient<IGeneric<T>, GenericRepository<T>();
 
             services.AddTransient<IPersonRepository, PersonRepository>();
+            services.AddTransient<IRequestRepository, RequestRepository>();
 
 
         }
@@ -108,6 +114,8 @@ namespace MigracionApi
         public void ConfigureServicio(IServiceCollection services)
         {
             services.AddScoped<PersonServices>();
+            services.AddScoped<RequestServices>();
+
         }
     }
 }
